@@ -5,8 +5,8 @@ import StudentBody from "./StudentBody";
 
 function StudentList() {
   const [students, setStudents] = useState([]);
-  const [editMode, setEditMode] = useState(false);
   const [editStudent, setEditStudent] = useState({});
+  const [editMode, setEditMode] = useState(false);
 
   const addStudent = (newStudentList) => {
     const newStudentLists = [newStudentList, ...students];
@@ -19,14 +19,13 @@ function StudentList() {
     setStudents(newStudentLists);
   };
 
-  // const getStudent = (data) => {
-  //   if (data) {
-  //     setEditMode(true);
-  //   }
+  const updateStudent = () => {
+    const newStudents = students.map((data) =>
+      data.id === editStudent.id ? editStudent : data
+    );
 
-  //   setEditStudent(data);
-  //   console.log(editStudent);
-  // };
+    setStudents(newStudents);
+  };
 
   return (
     <div>
@@ -36,10 +35,11 @@ function StudentList() {
 
       <AddStudentHeader
         addStudent={addStudent}
-        // editStudent={editStudent}
-        // editMode={editMode}
-        // setEditMode={setEditMode}
-        // setEditStudent={setEditStudent}
+        editStudent={editStudent}
+        editMode={editMode}
+        setEditMode={setEditMode}
+        setEditStudent={setEditStudent}
+        updateStudent={updateStudent}
       />
       <div className="container">
         <hr />
